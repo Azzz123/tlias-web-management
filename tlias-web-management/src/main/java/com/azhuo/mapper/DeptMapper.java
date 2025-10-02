@@ -25,4 +25,11 @@ public interface DeptMapper {
     // 然后在SQL语句中使用#{name}来引用参数值
     @Insert("INSERT INTO dept(name, create_time, update_time) VALUES (#{name}, #{createTime}, #{updateTime})")
     void insert(Dept dept);
+
+    @Select("SELECT id, name, create_time, update_time FROM dept WHERE id = #{id}")
+    Dept getById(Integer id);
+
+     // 更新部门
+    @Update("UPDATE dept SET id=#{id}, name=#{name}, update_time=#{updateTime} WHERE id = #{id}")
+    void update(Dept dept);
 }

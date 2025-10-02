@@ -29,6 +29,7 @@ public class DeptImplService implements DeptService {
         deptMapper.delete(id);
     }
 
+    // 新增部门
     @Override
     public void add(Dept dept) {
         // 补全基础属性，creatTime和updateTime
@@ -39,6 +40,16 @@ public class DeptImplService implements DeptService {
         deptMapper.insert(dept);
     }
 
-    // 新增部门
+    // 查询部门详情
+    @Override
+    public Dept getById(Integer id) {
+        return deptMapper.getById(id);
+    }
+    @Override
+    public void update(Dept dept) {
+        dept.setUpdateTime(LocalDateTime.now());
+        deptMapper.update(dept);
+    }
+
 
 }
