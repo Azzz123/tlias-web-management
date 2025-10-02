@@ -47,4 +47,16 @@ public class DeptController {
          deptService.delete(id);
          return Result.success();
      }
+     // 新增部门
+     @PostMapping("/depts")
+     // 通过RequestBody注解，将请求体中的JSON数据绑定到Dept对象中
+     // 例如：{"name":"开发部"}
+     // 然后在方法参数中声明Dept对象，Mybatis会自动将JSON数据填充到Dept对象中
+     // Dept{id=null, name='开发部', createTime=null, updateTime=null}
+     // 通常在post和put请求中使用RequestBody注解
+    public Result add(@RequestBody Dept dept){
+         System.out.println("添加部门："+dept);
+         deptService.add(dept);
+         return Result.success();
+     }
 }

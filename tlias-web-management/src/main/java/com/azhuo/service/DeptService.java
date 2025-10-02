@@ -9,4 +9,7 @@ public interface DeptService {
     List<Dept> findAll();
     // 删除部门
     void delete(Integer id);
+
+    // 新增部门
+    void add(Dept dept);
 }
