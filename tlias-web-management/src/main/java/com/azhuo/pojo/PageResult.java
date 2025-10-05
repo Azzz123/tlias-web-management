@@ -14,5 +14,5 @@ import java.util.List;
 @AllArgsConstructor
 public class PageResult<T> {
     private Long total; // 总记录数
-    private List<T> data; // 数据列表
+    private List<T> rows; // 数据列表
 }
