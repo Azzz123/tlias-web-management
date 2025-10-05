@@ -1,7 +1,9 @@
 package com.azhuo.service.impl;
 
+import com.azhuo.mapper.EmpExprMapper;
 import com.azhuo.mapper.EmpMapper;
 import com.azhuo.pojo.Emp;
+import com.azhuo.pojo.EmpExpr;
 import com.azhuo.pojo.EmpQueryParam;
 import com.azhuo.pojo.PageResult;
 import com.azhuo.service.EmpService;
@@ -9,6 +11,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.time.LocalDateTime;
 
 import java.util.List;
 
@@ -21,8 +26,12 @@ public class EmpImplService implements EmpService {
     @Autowired
     private final EmpMapper empMapper;
 
-    public EmpImplService(EmpMapper empMapper) {
+    @Autowired
+    private final EmpExprMapper empExprMapper;
+
+    public EmpImplService(EmpMapper empMapper, EmpExprMapper empExprMapper) {
         this.empMapper = empMapper;
+        this.empExprMapper = empExprMapper;
     }
     /*@Override
     public PageResult<Emp> page(Integer page, Integer pageSize) {
@@ -65,6 +74,26 @@ public class EmpImplService implements EmpService {
             // 3. 使用 page 对象获取总数，使用查询结果 rows 获取数据列表
             //    PageHelper 拦截器在执行完查询后，会自动把总记录数回填到 try() 中创建的 page 对象里
             return new PageResult<>(page.getTotal(), rows);
+        }
+    }
+
+    @Override
+    public void save(Emp emp) {
+        // 1. 调用 Mapper 层方法保存员工
+        // 1.1 补全基础属性
+        emp.setCreateTime(LocalDateTime.now());
+        emp.setUpdateTime(LocalDateTime.now());
+        // 1.2. 调用 Mapper 层方法保存员工
+        // 这里使用了 mybatis的主键返回 useGeneratedKeys="true" keyProperty="id" 来获取自动生成的主键值
+        // 并将其设置到 emp 对象的 id 属性中
+        empMapper.insert(emp);
+        // 2. 保存工作经历
+        List<EmpExpr> exprList = emp.getExprList();
+        if (!CollectionUtils.isEmpty(exprList)) {
+            // 2.1 补全工作经历基础属性，设置员工ID为返回的主键值
+            exprList.forEach(expr -> expr.setEmpId(emp.getId()));
+            // 2.2 调用 Mapper 层方法保存工作经历
+            empExprMapper.insertBatch(exprList);
         }
     }
 }

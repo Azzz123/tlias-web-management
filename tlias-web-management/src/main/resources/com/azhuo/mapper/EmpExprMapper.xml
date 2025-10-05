@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--解释foreach标签
+    collection: 集合名称，这里是 exprList
+    item: 集合中的每个元素，这里是 expr
+    separator: 每个元素之间的分隔符，这里是逗号
+-->
+
+<mapper namespace="com.azhuo.mapper.EmpExprMapper">
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO emp_expr
+        (emp_id, company, job, begin, end)
+        VALUES
+        <foreach collection="exprList" item="expr" separator=",">
+            (#{expr.empId}, #{expr.company}, #{expr.job}, #{expr.begin}, #{expr.end})
+        </foreach>
+    </insert>
+</mapper>
