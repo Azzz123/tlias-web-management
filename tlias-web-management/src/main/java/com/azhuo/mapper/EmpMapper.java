@@ -14,10 +14,7 @@ public interface EmpMapper {
     /*@Select("SELECT COUNT(*) FROM emp")
     Long count();*/
 
-    /**
-     * 分页查询
-     * @return 分页结果
-     */
+
     /*@Select("SELECT e.*, d.name AS deptName FROM emp e " +
             "LEFT JOIN dept d " +
             "ON d.id = e.dept_id " +
@@ -39,10 +36,17 @@ public interface EmpMapper {
      * 条件分页查询
      * @return 分页结果
      */
-    List<Emp> list(EmpQueryParam empQueryParam);
 
 //    输入 员工名称 进行搜索，支持模糊查询。
 //    选择 员工性别 进行精确查询。
 //    选择 入职时间的开始时间 和 结束时间，可以进行范围查询对查询结果
 //    根据修改时间倒序排序，并对查询结果进行分页展示
+    /**
+     * 分页查询
+     * @return 分页结果
+     */
+    List<Emp> list(EmpQueryParam empQueryParam);
+
+    void insert(Emp emp);
+
 }

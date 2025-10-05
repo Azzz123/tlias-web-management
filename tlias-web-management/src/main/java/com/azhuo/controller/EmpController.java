@@ -7,9 +7,7 @@ import com.azhuo.pojo.Result;
 import com.azhuo.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
@@ -37,6 +35,16 @@ public class EmpController {
         PageResult<Emp> pageResult = empService.page(empQueryParam);
         // 返回分页结果
         return Result.success(pageResult);
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Emp emp) {
+        // 日志记录
+        log.info("新增员工，参数：{}", emp);
+        // 调用服务层方法保存员工
+        empService.save(emp);
+        // 返回成功结果
+        return Result.success();
     }
 
 

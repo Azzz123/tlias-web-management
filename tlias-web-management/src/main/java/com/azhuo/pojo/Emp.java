@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class Emp {
@@ -23,4 +24,7 @@ public class Emp {
 
     // 因为在查询时，需要返回部门名称，所以这里添加一个部门名称字段
     private String deptName;
+
+    // 封装工作经历信息
+    private List<EmpExpr> exprList;
 }

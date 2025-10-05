@@ -21,4 +21,12 @@
         </where>
         ORDER BY e.update_time DESC
     </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO emp
+        (username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time)
+        VALUES
+        (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
+    </insert>
 </mapper>
+
