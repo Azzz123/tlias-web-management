@@ -2,15 +2,14 @@ package com.azhuo.service.impl;
 
 import com.azhuo.mapper.EmpExprMapper;
 import com.azhuo.mapper.EmpMapper;
-import com.azhuo.pojo.Emp;
-import com.azhuo.pojo.EmpExpr;
-import com.azhuo.pojo.EmpQueryParam;
-import com.azhuo.pojo.PageResult;
+import com.azhuo.pojo.*;
+import com.azhuo.service.EmpLogService;
 import com.azhuo.service.EmpService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
@@ -19,7 +18,7 @@ import java.util.List;
 
 
 @Service
-public class EmpImplService implements EmpService {
+public class EmpServiceImpl implements EmpService {
     /**
      * 分页查询员工
      */
@@ -29,9 +28,15 @@ public class EmpImplService implements EmpService {
     @Autowired
     private final EmpExprMapper empExprMapper;
 
-    public EmpImplService(EmpMapper empMapper, EmpExprMapper empExprMapper) {
+    @Autowired
+    private final EmpLogService empLogService;
+
+    public EmpServiceImpl(EmpMapper empMapper,
+                          EmpExprMapper empExprMapper,
+                          EmpLogService empLogService) {
         this.empMapper = empMapper;
         this.empExprMapper = empExprMapper;
+        this.empLogService = empLogService;
     }
     /*@Override
     public PageResult<Emp> page(Integer page, Integer pageSize) {
@@ -78,22 +83,34 @@ public class EmpImplService implements EmpService {
     }
 
     @Override
+    @Transactional
     public void save(Emp emp) {
-        // 1. 调用 Mapper 层方法保存员工
-        // 1.1 补全基础属性
-        emp.setCreateTime(LocalDateTime.now());
-        emp.setUpdateTime(LocalDateTime.now());
-        // 1.2. 调用 Mapper 层方法保存员工
-        // 这里使用了 mybatis的主键返回 useGeneratedKeys="true" keyProperty="id" 来获取自动生成的主键值
-        // 并将其设置到 emp 对象的 id 属性中
-        empMapper.insert(emp);
-        // 2. 保存工作经历
-        List<EmpExpr> exprList = emp.getExprList();
-        if (!CollectionUtils.isEmpty(exprList)) {
-            // 2.1 补全工作经历基础属性，设置员工ID为返回的主键值
-            exprList.forEach(expr -> expr.setEmpId(emp.getId()));
-            // 2.2 调用 Mapper 层方法保存工作经历
-            empExprMapper.insertBatch(exprList);
+        try {
+            // 1. 调用 Mapper 层方法保存员工
+            // 1.1 补全基础属性
+            emp.setCreateTime(LocalDateTime.now());
+            emp.setUpdateTime(LocalDateTime.now());
+            // 1.2. 调用 Mapper 层方法保存员工
+            // 这里使用了 mybatis的主键返回 useGeneratedKeys="true" keyProperty="id" 来获取自动生成的主键值
+            // 并将其设置到 emp 对象的 id 属性中
+            empMapper.insert(emp);
+
+//          测试事务回滚，模拟异常情况
+//            int i = 1 / 0;
+
+            // 2. 保存工作经历
+            List<EmpExpr> exprList = emp.getExprList();
+            if (!CollectionUtils.isEmpty(exprList)) {
+                // 2.1 补全工作经历基础属性，设置员工ID为返回的主键值
+                exprList.forEach(expr -> expr.setEmpId(emp.getId()));
+                // 2.2 调用 Mapper 层方法保存工作经历
+                empExprMapper.insertBatch(exprList);
+            }
+        } finally {
+            // 3.记录操作日志（不管成功/失败）
+            EmpLog empLog = new EmpLog(null, LocalDateTime.now(), "新增员工信息："+emp);
+            empLogService.insertLog(empLog);
         }
+
     }
 }

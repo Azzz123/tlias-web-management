@@ -17,4 +17,9 @@ mybatis:
 
 # 端口
 server:
-  port: 8888
+  port: 8080
+
+# 事务日志配置
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: DEBUG

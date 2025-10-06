@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class DeptImplService implements DeptService {
+public class DeptServiceImpl implements DeptService {
     @Autowired
     private final DeptMapper deptMapper;
     // 构造方法注入部门映射器
-    public DeptImplService(DeptMapper deptMapper) {
+    public DeptServiceImpl(DeptMapper deptMapper) {
         this.deptMapper = deptMapper;
     }
     // 查询全部部门数据
