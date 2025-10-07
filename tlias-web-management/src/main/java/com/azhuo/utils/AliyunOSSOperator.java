@@ -4,6 +4,7 @@ import com.aliyun.oss.*;
 import com.aliyun.oss.common.auth.CredentialsProviderFactory;
 import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.common.comm.SignVersion;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
@@ -12,10 +13,13 @@ import java.util.UUID;
 
 @Component
 public class AliyunOSSOperator {
-
-    private String endpoint = "https://oss-cn-beijing.aliyuncs.com";
-    private String bucketName = "java-web-azhuo";
-    private String region = "cn-beijing";
+    // 从application.yml配置文件中读取阿里云OSS配置
+    @Value("${aliyun.oss.endpoint}")
+    private String endpoint;
+    @Value("${aliyun.oss.bucketName}")
+    private String bucketName;
+    @Value("${aliyun.oss.region}")
+    private String region;
 
     public String upload(byte[] content, String originalFilename) throws Exception {
         // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
