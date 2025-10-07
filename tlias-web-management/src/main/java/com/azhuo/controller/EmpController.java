@@ -40,6 +40,9 @@ public class EmpController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 新增员工
+     */
     @PostMapping
     public Result save(@RequestBody Emp emp) {
         // 日志记录
@@ -50,6 +53,9 @@ public class EmpController {
         return Result.success();
     }
 
+    /**
+     * 批量删除员工
+     */
     @DeleteMapping
     public Result delete(@RequestParam List<Integer> ids) {
         log.info("删除员工，参数：{}", Collections.singletonList(ids));
@@ -59,5 +65,15 @@ public class EmpController {
         return Result.success();
     }
 
-
+     /**
+      * 根据ID查询员工详情
+      */
+    @GetMapping("/{id}")
+    public Result getInfo(@PathVariable Integer id) {
+        log.info("根据ID查询员工详情，参数：{}", id);
+        // 调用服务层方法查询员工详情
+        Emp emp = empService.getInfo(id);
+        // 返回员工详情
+        return Result.success(emp);
+    }
 }

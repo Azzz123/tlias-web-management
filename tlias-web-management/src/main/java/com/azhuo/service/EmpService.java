@@ -29,4 +29,9 @@ public interface EmpService {
      * 批量删除员工
      */
     void delete(List<Integer> ids);
+
+    /**
+     * 根据ID查询员工详情
+     */
+    Emp getInfo(Integer id);
 }

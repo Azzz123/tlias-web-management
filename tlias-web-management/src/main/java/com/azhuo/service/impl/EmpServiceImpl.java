@@ -131,4 +131,12 @@ public class EmpServiceImpl implements EmpService {
         // 3.删除阿里云OSS
 
     }
+
+     /**
+      * 根据ID查询员工详情
+      */
+    @Override
+    public Emp getInfo(Integer id) {
+        return empMapper.getById(id);
+    }
 }
