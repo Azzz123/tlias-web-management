@@ -76,5 +76,22 @@
         ON e.id = ee.emp_id
         WHERE e.id = #{id}
     </select>
+
+    <!-- 根据ID更新员工基本信息 -->
+    <update id="updateById">
+        UPDATE emp
+        SET username = #{username},
+            password = #{password},
+            name = #{name},
+            gender = #{gender},
+            phone = #{phone},
+            job = #{job},
+            salary = #{salary},
+            image = #{image},
+            entry_date = #{entryDate},
+            dept_id = #{deptId},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
 </mapper>
 

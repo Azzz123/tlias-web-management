@@ -139,4 +139,33 @@ public class EmpServiceImpl implements EmpService {
     public Emp getInfo(Integer id) {
         return empMapper.getById(id);
     }
+
+    /**
+     * 更新员工
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(Emp emp) {
+        // 1. 根据id更新员工基本信息
+        // 1.1 补全基础属性
+        emp.setUpdateTime(LocalDateTime.now());
+        // 1.2 调用 Mapper 层方法更新员工
+        empMapper.updateById(emp);
+
+        // 2. 更新员工工作经历，先删再加
+        // 2.1 根据员工ID删除原有的工作经历
+        empExprMapper.deleteByEmpIds(List.of(emp.getId()));
+
+        // 2.2 保存新的工作经历
+        List<EmpExpr> exprList = emp.getExprList();
+        if (!CollectionUtils.isEmpty(exprList)) {
+            // 2.2.1 补全工作经历基础属性，设置员工ID为返回的主键值
+            // 因为修改界面的员工详细信息包括工作经历是前面查询回显出来的
+            // 如果在这个界面先删掉所有工作经历这时回显数据（也就是请求数据）的exprlist就是null
+            // 此时新增的话empid就需要自己赋值了
+            exprList.forEach(expr -> expr.setEmpId(emp.getId()));
+            // 2.2.2 调用 Mapper 层方法保存工作经历
+            empExprMapper.insertBatch(exprList);
+        }
+    }
 }

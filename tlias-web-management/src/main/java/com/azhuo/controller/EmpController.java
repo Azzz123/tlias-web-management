@@ -76,4 +76,16 @@ public class EmpController {
         // 返回员工详情
         return Result.success(emp);
     }
+
+    /**
+     * 更新员工
+     */
+    @PutMapping
+    public Result update(@RequestBody Emp emp) {
+        log.info("更新员工，参数：{}", emp);
+        // 调用服务层方法更新员工
+        empService.update(emp);
+        // 返回成功结果
+        return Result.success();
+    }
 }
