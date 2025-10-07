@@ -4,6 +4,8 @@ import com.azhuo.pojo.Emp;
 import com.azhuo.pojo.EmpQueryParam;
 import com.azhuo.pojo.PageResult;
 
+import java.util.List;
+
 
 public interface EmpService {
     /**
@@ -22,4 +24,9 @@ public interface EmpService {
      * 新增员工
      */
     void save(Emp emp);
+
+    /**
+     * 批量删除员工
+     */
+    void delete(List<Integer> ids);
 }

@@ -28,5 +28,14 @@
         VALUES
         (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
     </insert>
+
+    <!-- 批量删除员工基本信息 -->
+    <delete id="deleteByIds" parameterType="java.util.List">
+        DELETE FROM emp
+        WHERE id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
 

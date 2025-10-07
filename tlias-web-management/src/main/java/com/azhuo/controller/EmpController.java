@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -43,6 +46,15 @@ public class EmpController {
         log.info("新增员工，参数：{}", emp);
         // 调用服务层方法保存员工
         empService.save(emp);
+        // 返回成功结果
+        return Result.success();
+    }
+
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids) {
+        log.info("删除员工，参数：{}", Collections.singletonList(ids));
+        // 调用服务层方法删除员工
+        empService.delete(ids);
         // 返回成功结果
         return Result.success();
     }
