@@ -77,20 +77,45 @@
         WHERE e.id = #{id}
     </select>
 
-    <!-- 根据ID更新员工基本信息 -->
+    <!-- 根据ID更新员工基本信息,使用if判断各个字段是否更新，复用性高 -->
+    <!-- set标签会生成set关键字，并自动去掉最后一个逗号 -->
     <update id="updateById">
         UPDATE emp
-        SET username = #{username},
-            password = #{password},
-            name = #{name},
-            gender = #{gender},
-            phone = #{phone},
-            job = #{job},
-            salary = #{salary},
-            image = #{image},
-            entry_date = #{entryDate},
-            dept_id = #{deptId},
-            update_time = #{updateTime}
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="job != null and job != ''">
+                job = #{job},
+            </if>
+            <if test="salary != null">
+                salary = #{salary},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="entryDate != null">
+                entry_date = #{entryDate},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
         WHERE id = #{id}
     </update>
 </mapper>
