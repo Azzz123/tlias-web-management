@@ -9,4 +9,18 @@
 -->
 
 <mapper namespace="com.azhuo.mapper.ClazzMapper">
+    <!-- 分页查询班级 -->
+    <select id="list" resultType="com.azhuo.pojo.Clazz">
+        SELECT c.* FROM clazz AS c
+        LEFT JOIN emp AS e ON c.master_id = e.id
+        <where>
+            <if test="name != null and name != ''">
+                c.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="begin != null and end != null">
+                AND c.end_date BETWEEN #{begin} AND #{end}
+            </if>
+        </where>
+        ORDER BY c.update_time DESC
+    </select>
 </mapper>
