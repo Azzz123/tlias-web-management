@@ -5,6 +5,7 @@ import com.azhuo.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 // 员工基本信息操作接口
 @Mapper
@@ -47,11 +48,28 @@ public interface EmpMapper {
      */
     List<Emp> list(EmpQueryParam empQueryParam);
 
+    /**
+     * 新增员工
+     */
     void insert(Emp emp);
 
+    /**
+     * 批量删除员工
+     */
     void deleteByIds(List<Integer> ids);
 
+    /**
+     * 根据ID查询员工
+     */
     Emp getById(Integer id);
 
+    /**
+     * 更新员工信息
+     */
     void updateById(Emp emp);
+
+    /**
+     * 统计员工职位人数
+     */
+    List<Map<String, Object>> countEmpJobData();
 }

@@ -118,5 +118,22 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="countEmpJobData" resultType="java.util.Map">
+        SELECT
+            (CASE
+                 WHEN job = 1 THEN '班主任'
+                 WHEN job = 2 THEN '讲师'
+                 WHEN job = 3 THEN '学工主管'
+                 WHEN job = 4 THEN '教研主管'
+                 WHEN job = 5 THEN '咨询师'
+                 ELSE '其他'
+                END) AS pos,
+            COUNT(*) AS num
+        FROM emp
+        GROUP BY job
+        ORDER BY num
+    </select>
+
 </mapper>
 
