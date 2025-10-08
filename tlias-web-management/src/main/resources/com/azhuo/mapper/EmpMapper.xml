@@ -135,5 +135,13 @@
         ORDER BY num
     </select>
 
+     <select id="countEmpGenderData" resultType="java.util.Map">
+         SELECT
+             IF(gender = 1, '男性员工', '女性员工') AS gender,
+             COUNT(*) AS value
+         FROM emp
+         GROUP BY gender
+    </select>
+
 </mapper>
 
