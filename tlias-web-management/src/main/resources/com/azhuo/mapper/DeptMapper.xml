@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--解释foreach标签
+    collection: 集合名称，这里是 exprList
+    item: 集合中的每个元素，这里是 expr
+    separator: 每个元素之间的分隔符，这里是逗号
+-->
+
+<mapper namespace="com.azhuo.mapper.DeptMapper">
+    <!-- 查询全部部门数据 -->
+    <select id="findAll" resultType="com.azhuo.pojo.Dept">
+        SELECT id, name, create_time, update_time FROM dept ORDER BY update_time DESC
+    </select>
+
+
+    <!-- 删除部门 -->
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM dept WHERE id = #{id}
+    </delete>
+
+    <!-- 添加部门 -->
+    <insert id="insert" parameterType="com.azhuo.pojo.Dept">
+        INSERT INTO dept(name, create_time, update_time) VALUES (#{name}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!-- 查询部门详情 -->
+    <select id="getById" parameterType="java.lang.Integer" resultType="com.azhuo.pojo.Dept">
+        SELECT id, name, create_time, update_time FROM dept WHERE id = #{id}
+    </select>
+
+    <!-- 更新部门 -->
+    <update id="update" parameterType="com.azhuo.pojo.Dept">
+        UPDATE dept SET id=#{id}, name=#{name}, update_time=#{updateTime} WHERE id = #{id}
+    </update>
+</mapper>
