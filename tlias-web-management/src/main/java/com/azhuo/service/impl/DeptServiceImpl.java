@@ -1,10 +1,13 @@
 package com.azhuo.service.impl;
 
+import com.azhuo.exception.DeptHavingEmpException;
 import com.azhuo.mapper.DeptMapper;
+import com.azhuo.mapper.EmpMapper;
 import com.azhuo.pojo.Dept;
 import com.azhuo.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,9 +16,12 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
     @Autowired
     private final DeptMapper deptMapper;
+    @Autowired
+    private final EmpMapper empMapper;
     // 构造方法注入部门映射器
-    public DeptServiceImpl(DeptMapper deptMapper) {
+    public DeptServiceImpl(DeptMapper deptMapper, EmpMapper empMapper) {
         this.deptMapper = deptMapper;
+        this.empMapper = empMapper;
     }
     // 查询全部部门数据
     @Override
@@ -25,7 +31,18 @@ public class DeptServiceImpl implements DeptService {
 
      // 删除部门
     @Override
+    @Transactional
     public void delete(Integer id) {
+//    如果部门下有员工，则不允许删除该部门
+//    给前端提示错误信息：对不起，当前部门下有员工，不能直接删除！
+//    否则，删除部门
+        // 检查部门下是否有员工
+        int count = empMapper.countByDeptId(id);
+        if (count > 0) {
+            // 有员工，不允许删除
+            throw new DeptHavingEmpException("对不起，当前部门下有员工，不能直接删除！");
+        }
+        // 没有员工，允许删除
         deptMapper.delete(id);
     }
 

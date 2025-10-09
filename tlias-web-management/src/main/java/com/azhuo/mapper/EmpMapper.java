@@ -82,5 +82,8 @@ public interface EmpMapper {
       * 查询全部员工
       */
     List<Emp> getAll();
-
+    /**
+     * 根据部门ID查询员工数量
+     */
+    int countByDeptId(Integer id);
 }

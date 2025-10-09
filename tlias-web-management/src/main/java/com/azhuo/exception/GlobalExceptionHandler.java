@@ -36,4 +36,13 @@ public class GlobalExceptionHandler {
         log.error("程序数据关联出错啦~", e);
         return Result.error(e.getMessage());
     }
+
+    /**
+     * 处理部门下有员工异常
+     */
+    @ExceptionHandler(DeptHavingEmpException.class)
+    public Result handleDeptHavingEmpException(DeptHavingEmpException e) {
+        log.error("程序部门下有员工出错啦~", e);
+        return Result.error(e.getMessage());
+    }
 }
