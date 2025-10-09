@@ -52,4 +52,14 @@ public class ReportController {
         StudentClazzData studentClazzData = reportService.getStudentCount();
         return Result.success(studentClazzData);
     }
+
+    /**
+     * 统计学员学历
+     */
+    @GetMapping("/studentDegreeData")
+    public Result getStudentDegreeData() {
+        log.info("统计学员学历");
+        List<Map<String, Object>> list = reportService.getStudentDegreeData();
+        return Result.success(list);
+    }
 }

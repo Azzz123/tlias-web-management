@@ -21,4 +21,8 @@ public interface ReportService {
       * 统计班级人数
       */
     StudentClazzData getStudentCount();
+    /**
+     * 统计学员学历
+     */
+    List<Map<String, Object>> getStudentDegreeData();
 }

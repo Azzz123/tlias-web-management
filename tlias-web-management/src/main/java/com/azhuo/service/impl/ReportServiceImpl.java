@@ -1,7 +1,7 @@
 package com.azhuo.service.impl;
 
-import com.azhuo.mapper.ClazzMapper;
 import com.azhuo.mapper.EmpMapper;
+import com.azhuo.mapper.StudentMapper;
 import com.azhuo.pojo.JobOption;
 import com.azhuo.pojo.StudentClazzData;
 import com.azhuo.service.ReportService;
@@ -16,10 +16,11 @@ public class ReportServiceImpl implements ReportService {
     @Autowired
     private final EmpMapper empMapper;
     @Autowired
-    private final ClazzMapper clazzMapper;
-    public ReportServiceImpl(EmpMapper empMapper, ClazzMapper clazzMapper) {
+    private final StudentMapper studentMapper;
+
+    public ReportServiceImpl(EmpMapper empMapper, StudentMapper studentMapper) {
         this.empMapper = empMapper;
-        this.clazzMapper = clazzMapper;
+        this.studentMapper = studentMapper;
     }
 
     /**
@@ -47,11 +48,18 @@ public class ReportServiceImpl implements ReportService {
       */
     @Override
     public StudentClazzData getStudentCount() {
-        List<Map<String, Object>> list = clazzMapper.countStudentCount();
+        List<Map<String, Object>> list = studentMapper.countStudentCount();
 
         List<Object> clazzList = list.stream().map(map -> map.get("clazz_name")).toList();
         List<Object> dataList = list.stream().map(map -> map.get("num")).toList();
 
         return new StudentClazzData(clazzList, dataList);
+    }
+     /**
+      * 统计学员学历
+      */
+    @Override
+    public List<Map<String, Object>> getStudentDegreeData() {
+        return studentMapper.countStudentDegreeData();
     }
 }

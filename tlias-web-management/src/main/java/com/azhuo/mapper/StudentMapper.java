@@ -5,6 +5,7 @@ import com.azhuo.pojo.StudentQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface StudentMapper {
@@ -28,4 +29,15 @@ public interface StudentMapper {
      * 修改学生
      */
     void update(Student student);
+
+
+    /**
+     * 统计班级人数
+     */
+    List<Map<String, Object>> countStudentCount();
+
+    /**
+     * 统计学员学历
+     */
+    List<Map<String, Object>> countStudentDegreeData();
 }
