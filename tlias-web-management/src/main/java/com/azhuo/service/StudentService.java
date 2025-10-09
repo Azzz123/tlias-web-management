@@ -4,6 +4,8 @@ import com.azhuo.pojo.PageResult;
 import com.azhuo.pojo.Student;
 import com.azhuo.pojo.StudentQueryParam;
 
+import java.util.List;
+
 public interface StudentService {
     /**
      * 分页查询学生
@@ -17,4 +19,8 @@ public interface StudentService {
      * 根据ID查询学生
      */
     Student getById(Integer id);
+    /**
+     * 批量删除学生
+     */
+    void delete(List<Integer> ids);
 }

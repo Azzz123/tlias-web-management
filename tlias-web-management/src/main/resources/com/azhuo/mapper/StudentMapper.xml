@@ -41,4 +41,11 @@
         SELECT id, name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id, violation_count, violation_score, create_time, update_time
         FROM student WHERE id = #{id}
     </select>
+    <!-- 批量删除学生 -->
+    <delete id="delete" parameterType="java.util.List">
+        DELETE FROM student WHERE id IN
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

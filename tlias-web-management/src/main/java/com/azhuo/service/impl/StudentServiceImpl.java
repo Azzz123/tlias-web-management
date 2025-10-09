@@ -57,4 +57,13 @@ public class StudentServiceImpl implements StudentService {
     public Student getById(Integer id) {
         return studentMapper.selectById(id);
     }
+
+    /**
+     * 批量删除学生
+     */
+    @Override
+    public void delete(List<Integer> ids) {
+        // 1. 调用 mapper 方法删除学生
+        studentMapper.delete(ids);
+    }
 }

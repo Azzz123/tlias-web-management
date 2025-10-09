@@ -20,4 +20,8 @@ public interface StudentMapper {
      * 根据ID查询学生
      */
     Student selectById(Integer id);
+    /**
+     * 批量删除学生
+     */
+    void delete(List<Integer> ids);
 }
