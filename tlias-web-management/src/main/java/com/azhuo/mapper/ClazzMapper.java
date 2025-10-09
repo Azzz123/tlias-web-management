@@ -26,4 +26,13 @@ public interface ClazzMapper {
      */
     void update(Clazz clazz);
 
+     /**
+      * 根据班级ID查询班级下的学生数量
+      */
+    int countStudentByClazzId(Integer id);
+
+     /**
+      * 根据ID删除班级
+      */
+    void deleteById(Integer id);
 }

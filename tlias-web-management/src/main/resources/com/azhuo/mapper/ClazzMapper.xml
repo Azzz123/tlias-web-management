@@ -37,10 +37,20 @@
         SELECT * FROM clazz WHERE id = #{id}
     </select>
 
-     <!-- 修改班级 -->
+    <!-- 修改班级 -->
     <update id="update" parameterType="com.azhuo.pojo.Clazz">
         UPDATE clazz
         SET name = #{name}, room = #{room}, begin_date = #{beginDate}, end_date = #{endDate}, master_id = #{masterId}, subject = #{subject}, update_time = #{updateTime}
         WHERE id = #{id}
     </update>
+
+    <!-- 根据班级ID查询班级下的学生数量 -->
+    <select id="countStudentByClazzId" resultType="int">
+        SELECT COUNT(*) FROM student WHERE clazz_id = #{id}
+    </select>
+
+    <!-- 根据ID删除班级 -->
+    <delete id="deleteById">
+        DELETE FROM clazz WHERE id = #{id}
+    </delete>
 </mapper>

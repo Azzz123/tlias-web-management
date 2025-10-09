@@ -15,7 +15,10 @@ public class GlobalExceptionHandler {
         return Result.error("操作失败");
     }
 
-    @ExceptionHandler
+    /**
+     * 处理重复键异常
+     */
+    @ExceptionHandler(DuplicateKeyException.class)
     public Result handleDuplicateKeyException(DuplicateKeyException e) {
         log.error("程序出错啦~", e);
         String message = e.getMessage();
@@ -23,5 +26,14 @@ public class GlobalExceptionHandler {
         String errMsg = message.substring(i);
         String[] arr = errMsg.split("");
         return Result.error(arr[2]+"已存在");
+    }
+
+    /**
+     * 处理数据关联异常
+     */
+    @ExceptionHandler(DataRelationViolationException.class)
+    public Result handleDataRelationViolationException(DataRelationViolationException e) {
+        log.error("程序数据关联出错啦~", e);
+        return Result.error(e.getMessage());
     }
 }

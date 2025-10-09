@@ -1,5 +1,6 @@
 package com.azhuo.service.impl;
 
+import com.azhuo.exception.DataRelationViolationException;
 import com.azhuo.mapper.ClazzMapper;
 import com.azhuo.pojo.Clazz;
 import com.azhuo.pojo.ClazzQueryParam;
@@ -75,5 +76,18 @@ public class ClazzServiceImpl implements ClazzService {
     public void update(Clazz clazz) {
         clazz.setUpdateTime(LocalDateTime.now());
         clazzMapper.update(clazz);
+    }
+
+     /**
+      * 根据ID删除班级
+      */
+    @Override
+    public void deleteById(Integer id) {
+        // 若student表中存在该班级的学生记录，不允许删除
+        if (clazzMapper.countStudentByClazzId(id) > 0) {
+            throw new DataRelationViolationException("对不起, 该班级下有学生, 不能直接删除");
+        }
+        // 若不存在学生记录，允许删除
+        clazzMapper.deleteById(id);
     }
 }
