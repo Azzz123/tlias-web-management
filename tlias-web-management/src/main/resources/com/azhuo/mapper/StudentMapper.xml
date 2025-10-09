@@ -9,4 +9,24 @@
 -->
 
 <mapper namespace="com.azhuo.mapper.StudentMapper">
+    <!-- 分页查询学员 -->
+    <select id="page" resultType="com.azhuo.pojo.Student">
+        SELECT s.*, c.name
+        FROM student AS s
+        LEFT JOIN clazz AS c
+        ON s.clazz_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                s.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="degree != null">
+                AND s.degree = #{degree}
+            </if>
+            <if test="clazzId != null">
+                AND s.clazz_id = #{clazzId}
+            </if>
+        </where>
+        ORDER BY s.update_time DESC
+    </select>
+
 </mapper>
