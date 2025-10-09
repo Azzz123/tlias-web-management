@@ -31,4 +31,9 @@
         VALUES
             (#{name}, #{room}, #{beginDate}, #{endDate}, #{masterId}, #{subject}, #{createTime}, #{updateTime})
     </insert>
+
+    <!-- 根据ID查询班级 -->
+    <select id="getById" resultType="com.azhuo.pojo.Clazz">
+        SELECT * FROM clazz WHERE id = #{id}
+    </select>
 </mapper>

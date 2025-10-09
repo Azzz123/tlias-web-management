@@ -42,4 +42,16 @@ public class ClazzController {
         return Result.success();
     }
 
+    /**
+     * 根据ID查询班级
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        log.info("根据ID查询班级，参数：{}", id);
+        // 调用服务层方法根据ID查询班级
+        Clazz clazz = clazzService.getById(id);
+        // 返回班级信息
+        return Result.success(clazz);
+    }
+
 }

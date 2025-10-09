@@ -49,11 +49,20 @@ public class ClazzServiceImpl implements ClazzService {
             return new PageResult<>(page.getTotal(), rows);
         }
     }
-
+    /**
+     * 添加班级
+     */
     @Override
     public void save(Clazz clazz) {
         clazz.setCreateTime(LocalDateTime.now());
         clazz.setUpdateTime(LocalDateTime.now());
         clazzMapper.insert(clazz);
+    }
+    /**
+     * 根据ID查询班级
+     */
+    @Override
+    public Clazz getById(Integer id) {
+        return clazzMapper.getById(id);
     }
 }
