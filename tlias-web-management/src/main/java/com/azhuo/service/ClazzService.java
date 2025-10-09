@@ -17,4 +17,9 @@ public interface ClazzService {
      * 根据ID查询班级
      */
     Clazz getById(Integer id);
+
+    /**
+     * 修改班级
+     */
+    void update(Clazz clazz);
 }

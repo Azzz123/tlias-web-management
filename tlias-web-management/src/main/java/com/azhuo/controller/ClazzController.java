@@ -54,4 +54,16 @@ public class ClazzController {
         return Result.success(clazz);
     }
 
+    /**
+     * 修改班级
+     */
+    @PutMapping
+    public Result update(@RequestBody Clazz clazz) {
+        log.info("修改班级，参数：{}", clazz);
+        // 调用服务层方法修改班级
+        clazzService.update(clazz);
+        // 返回成功结果
+        return Result.success();
+    }
+
 }

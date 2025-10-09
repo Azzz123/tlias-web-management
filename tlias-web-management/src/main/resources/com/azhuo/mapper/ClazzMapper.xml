@@ -36,4 +36,11 @@
     <select id="getById" resultType="com.azhuo.pojo.Clazz">
         SELECT * FROM clazz WHERE id = #{id}
     </select>
+
+     <!-- 修改班级 -->
+    <update id="update" parameterType="com.azhuo.pojo.Clazz">
+        UPDATE clazz
+        SET name = #{name}, room = #{room}, begin_date = #{beginDate}, end_date = #{endDate}, master_id = #{masterId}, subject = #{subject}, update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
 </mapper>
