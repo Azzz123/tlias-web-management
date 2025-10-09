@@ -1,13 +1,12 @@
 package com.azhuo.controller;
 
-import com.azhuo.pojo.Clazz;
-import com.azhuo.pojo.ClazzQueryParam;
-import com.azhuo.pojo.PageResult;
-import com.azhuo.pojo.Result;
+import com.azhuo.pojo.*;
 import com.azhuo.service.ClazzService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -76,6 +75,16 @@ public class ClazzController {
         clazzService.deleteById(id);
         // 返回成功结果
         return Result.success();
+    }
+
+    /**
+     * 查询所有班级
+     */
+    @GetMapping("/list")
+    public Result getAll() {
+        log.info("查询所有班级");
+        List<Clazz> clazzList = clazzService.getAll();
+        return Result.success(clazzList);
     }
 
 }

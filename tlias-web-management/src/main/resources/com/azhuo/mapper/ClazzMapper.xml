@@ -51,6 +51,12 @@
 
     <!-- 根据ID删除班级 -->
     <delete id="deleteById">
-        DELETE FROM clazz WHERE id = #{id}
+        DELETE FROM clazz
+               WHERE id = #{id}
     </delete>
+
+    <!-- 查询所有班级 -->
+    <select id="getAll" resultType="com.azhuo.pojo.Clazz">
+        SELECT id, name, room, begin_date, end_date, master_id, subject, create_time, update_time FROM clazz
+    </select>
 </mapper>

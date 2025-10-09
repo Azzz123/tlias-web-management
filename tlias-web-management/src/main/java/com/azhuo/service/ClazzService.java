@@ -4,6 +4,8 @@ import com.azhuo.pojo.Clazz;
 import com.azhuo.pojo.ClazzQueryParam;
 import com.azhuo.pojo.PageResult;
 
+import java.util.List;
+
 public interface ClazzService {
     /**
      * 分页查询班级
@@ -27,4 +29,9 @@ public interface ClazzService {
       * 根据ID删除班级
       */
     void deleteById(Integer id);
+
+    /**
+     * 查询所有班级
+     */
+    List<Clazz> getAll();
 }

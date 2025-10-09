@@ -90,4 +90,12 @@ public class ClazzServiceImpl implements ClazzService {
         // 若不存在学生记录，允许删除
         clazzMapper.deleteById(id);
     }
+
+    /**
+     * 查询所有班级
+     */
+    @Override
+    public List<Clazz> getAll() {
+        return clazzMapper.getAll();
+    }
 }

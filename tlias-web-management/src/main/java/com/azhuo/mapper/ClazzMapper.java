@@ -35,4 +35,9 @@ public interface ClazzMapper {
       * 根据ID删除班级
       */
     void deleteById(Integer id);
+
+    /**
+     * 查询所有班级
+     */
+    List<Clazz> getAll();
 }
