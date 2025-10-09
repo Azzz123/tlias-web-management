@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -47,5 +48,12 @@ public class ClazzServiceImpl implements ClazzService {
             //    PageHelper 拦截器在执行完查询后，会自动把总记录数回填到 try() 中创建的 page 对象里
             return new PageResult<>(page.getTotal(), rows);
         }
+    }
+
+    @Override
+    public void save(Clazz clazz) {
+        clazz.setCreateTime(LocalDateTime.now());
+        clazz.setUpdateTime(LocalDateTime.now());
+        clazzMapper.insert(clazz);
     }
 }

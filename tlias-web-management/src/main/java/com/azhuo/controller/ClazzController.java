@@ -7,9 +7,7 @@ import com.azhuo.pojo.Result;
 import com.azhuo.service.ClazzService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -30,6 +28,18 @@ public class ClazzController {
         PageResult<Clazz> pageResult = clazzService.page(clazzQueryParam);
         // 返回分页结果
         return Result.success(pageResult);
+    }
+
+    /**
+     * 添加班级
+     */
+    @PostMapping
+    public Result save(@RequestBody Clazz clazz) {
+        log.info("添加班级，参数：{}", clazz);
+        // 调用服务层方法添加班级
+        clazzService.save(clazz);
+        // 返回成功结果
+        return Result.success();
     }
 
 }

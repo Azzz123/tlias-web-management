@@ -23,4 +23,12 @@
         </where>
         ORDER BY c.update_time DESC
     </select>
+
+    <!-- 新增班级 -->
+    <insert id="insert" parameterType="com.azhuo.pojo.Clazz">
+        INSERT INTO clazz
+            (name, room, begin_date, end_date, master_id, subject, create_time, update_time)
+        VALUES
+            (#{name}, #{room}, #{beginDate}, #{endDate}, #{masterId}, #{subject}, #{createTime}, #{updateTime})
+    </insert>
 </mapper>
