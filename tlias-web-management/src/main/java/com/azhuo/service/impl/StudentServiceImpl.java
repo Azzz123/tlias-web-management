@@ -50,4 +50,11 @@ public class StudentServiceImpl implements StudentService {
         // 2. 调用 mapper 方法添加学员
         studentMapper.insert(student);
     }
+    /**
+     * 根据ID查询学生
+     */
+    @Override
+    public Student getById(Integer id) {
+        return studentMapper.selectById(id);
+    }
 }

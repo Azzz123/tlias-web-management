@@ -16,4 +16,8 @@ public interface StudentMapper {
      * 添加学员
      */
     void insert(Student student);
+    /**
+     * 根据ID查询学生
+     */
+    Student selectById(Integer id);
 }

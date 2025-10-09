@@ -11,7 +11,8 @@
 <mapper namespace="com.azhuo.mapper.StudentMapper">
     <!-- 分页查询学员 -->
     <select id="page" resultType="com.azhuo.pojo.Student">
-        SELECT s.*, c.name
+        SELECT s.id, s.name, s.no, s.gender, s.phone, s.id_card, s.is_college, s.address, s.degree, s.graduation_date, s.clazz_id, s.violation_count, s.violation_score, s.create_time, s.update_time,
+               c.name
         FROM student AS s
         LEFT JOIN clazz AS c
         ON s.clazz_id = c.id
@@ -35,4 +36,9 @@
         VALUES
             (#{name}, #{no}, #{gender}, #{phone}, #{idCard}, #{isCollege}, #{address}, #{degree}, #{graduationDate}, #{clazzId}, #{createTime}, #{updateTime})
     </insert>
+    <!-- 根据ID查询学生 -->
+    <select id="selectById" resultType="com.azhuo.pojo.Student">
+        SELECT id, name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id, violation_count, violation_score, create_time, update_time
+        FROM student WHERE id = #{id}
+    </select>
 </mapper>

@@ -13,4 +13,8 @@ public interface StudentService {
      * 添加学员
      */
     void add(Student student);
+    /**
+     * 根据ID查询学生
+     */
+    Student getById(Integer id);
 }
