@@ -73,11 +73,14 @@ public interface EmpMapper {
      */
     List<Map<String, Object>> countEmpJobData();
 
-
+    /**
+     * 统计员工性别人数
+     */
     List<Map<String, Object>> countEmpGenderData();
 
      /**
       * 查询全部员工
       */
     List<Emp> getAll();
+
 }

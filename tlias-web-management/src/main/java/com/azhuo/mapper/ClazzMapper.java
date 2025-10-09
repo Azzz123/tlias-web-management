@@ -5,6 +5,7 @@ import com.azhuo.pojo.ClazzQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ClazzMapper {
@@ -40,4 +41,9 @@ public interface ClazzMapper {
      * 查询所有班级
      */
     List<Clazz> getAll();
+
+     /**
+      * 统计班级人数
+      */
+    List<Map<String, Object>> countStudentCount();
 }

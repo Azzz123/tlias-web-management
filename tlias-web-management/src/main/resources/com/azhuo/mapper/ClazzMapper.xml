@@ -59,4 +59,15 @@
     <select id="getAll" resultType="com.azhuo.pojo.Clazz">
         SELECT id, name, room, begin_date, end_date, master_id, subject, create_time, update_time FROM clazz
     </select>
+    <!-- 统计班级人数 -->
+    <select id="countStudentCount" resultType="java.util.Map">
+        SELECT
+            c.name AS clazz_name,
+            COUNT(s.id) AS num
+        FROM clazz AS c
+        LEFT JOIN student AS s ON c.id = s.clazz_id
+        GROUP BY c.id
+        ORDER BY num DESC
+    </select>
+
 </mapper>

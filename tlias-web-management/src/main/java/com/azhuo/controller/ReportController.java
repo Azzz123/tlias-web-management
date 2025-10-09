@@ -2,6 +2,7 @@ package com.azhuo.controller;
 
 import com.azhuo.pojo.JobOption;
 import com.azhuo.pojo.Result;
+import com.azhuo.pojo.StudentClazzData;
 import com.azhuo.service.ReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,15 @@ public class ReportController {
         log.info("统计员工性别数量");
         List<Map<String, Object>> list = reportService.getEmpGenderData();
         return Result.success(list);
+    }
+
+    /**
+     * 统计班级人数
+     */
+    @GetMapping("/studentCountData")
+    public Result getStudentCountData() {
+        log.info("统计班级人数");
+        StudentClazzData studentClazzData = reportService.getStudentCount();
+        return Result.success(studentClazzData);
     }
 }
