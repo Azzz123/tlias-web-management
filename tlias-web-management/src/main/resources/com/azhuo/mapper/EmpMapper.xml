@@ -119,6 +119,7 @@
         WHERE id = #{id}
     </update>
 
+    <!-- 查询员工岗位分布数据 -->
     <select id="countEmpJobData" resultType="java.util.Map">
         SELECT
             (CASE
@@ -135,6 +136,7 @@
         ORDER BY num
     </select>
 
+     <!-- 查询员工性别分布数据 -->
      <select id="countEmpGenderData" resultType="java.util.Map">
          SELECT
              IF(gender = 1, '男性员工', '女性员工') AS gender,
@@ -142,6 +144,12 @@
          FROM emp
          GROUP BY gender
     </select>
+
+    <!-- 查询全部员工 -->
+    <select id="getAll" resultType="com.azhuo.pojo.Emp">
+        SELECT * FROM emp
+    </select>
+
 
 </mapper>
 

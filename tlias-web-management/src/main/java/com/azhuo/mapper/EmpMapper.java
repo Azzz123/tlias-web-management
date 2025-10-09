@@ -75,4 +75,9 @@ public interface EmpMapper {
 
 
     List<Map<String, Object>> countEmpGenderData();
+
+     /**
+      * 查询全部员工
+      */
+    List<Emp> getAll();
 }
