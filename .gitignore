@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 /nginx-1.22.0-web/
+/log
 
 ### STS ###
 .apt_generated

@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/nginx-1.22.0-web" />
+      <excludeFolder url="file://$MODULE_DIR$/log" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
