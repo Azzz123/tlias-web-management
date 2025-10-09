@@ -61,4 +61,24 @@ public class StudentController {
         studentService.delete(ids);
         return Result.success();
     }
+
+    /**
+     * 修改学生
+     */
+    @PutMapping
+    public Result update(@RequestBody Student student) {
+        log.info("修改学生: {}", student.toString());
+        studentService.update(student);
+        return Result.success();
+    }
+    /**
+     * 违纪处理
+     */
+    @PutMapping("/violation/{id}/{score}")
+    public Result violation(@PathVariable Integer id,
+                            @PathVariable Short score) {
+        log.info("违纪处理: {}", id);
+        studentService.violation(id, score);
+        return Result.success();
+    }
 }

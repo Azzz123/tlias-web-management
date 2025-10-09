@@ -23,4 +23,12 @@ public interface StudentService {
      * 批量删除学生
      */
     void delete(List<Integer> ids);
+    /**
+     * 修改学生
+     */
+    void update(Student student);
+    /**
+     * 违纪处理
+     */
+    void violation(Integer id, Short score);
 }

@@ -48,4 +48,22 @@
             #{id}
         </foreach>
     </delete>
+    <!-- 修改学生 -->
+    <update id="update" parameterType="com.azhuo.pojo.Student">
+        UPDATE student SET
+            name = #{name},
+            no = #{no},
+            gender = #{gender},
+            phone = #{phone},
+            id_card = #{idCard},
+            is_college = #{isCollege},
+            address = #{address},
+            degree = #{degree},
+            graduation_date = #{graduationDate},
+            clazz_id = #{clazzId},
+            violation_count = #{violationCount},
+            violation_score = #{violationScore},
+            update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
 </mapper>
