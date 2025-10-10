@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j
-@WebFilter(urlPatterns = "/*") // 拦截所有请求
+//@WebFilter(urlPatterns = "/*") // 拦截所有请求
 public class TokenFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
