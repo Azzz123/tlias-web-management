@@ -2,7 +2,9 @@ package com.azhuo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
+@ServletComponentScan // 开启springboot对servlet组件的扫描支持
 @SpringBootApplication
 public class TliasWebManagementApplication {
 
