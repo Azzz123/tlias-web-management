@@ -7,6 +7,7 @@ import com.azhuo.service.EmpLogService;
 import com.azhuo.service.EmpService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 
 import java.util.List;
 
-
+@Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
     /**
@@ -169,8 +170,33 @@ public class EmpServiceImpl implements EmpService {
         }
     }
 
+     /**
+      * 查询全部员工
+      */
     @Override
     public List<Emp> getAll() {
         return empMapper.getAll();
+    }
+
+     /**
+      * 员工登录
+      */
+    @Override
+    public LoginInfo login(Emp emp) {
+        // 1 调用mapper接口查询员工信息
+        Emp loginEmp = empMapper.selectByUsernameAndPassword(emp.getUsername(), emp.getPassword());
+        // 2 判断是否存在员工
+        if (loginEmp == null) {
+            return null;
+        }
+        // 3 存在，返回登录信息
+        log.info("登录成功，员工信息：{}",
+                loginEmp);
+        return new LoginInfo(
+                loginEmp.getId(),
+                loginEmp.getUsername(),
+                loginEmp.getName(),
+                ""
+        );
     }
 }

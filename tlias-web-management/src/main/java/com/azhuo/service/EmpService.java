@@ -2,6 +2,7 @@ package com.azhuo.service;
 
 import com.azhuo.pojo.Emp;
 import com.azhuo.pojo.EmpQueryParam;
+import com.azhuo.pojo.LoginInfo;
 import com.azhuo.pojo.PageResult;
 
 import java.util.List;
@@ -41,4 +42,9 @@ public interface EmpService {
       * 查询全部员工
       */
     List<Emp> getAll();
+
+     /**
+      * 员工登录
+      */
+    LoginInfo login(Emp emp);
 }

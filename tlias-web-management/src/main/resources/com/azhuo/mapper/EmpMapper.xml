@@ -155,5 +155,9 @@
         SELECT COUNT(*) FROM emp WHERE dept_id = #{id}
     </select>
 
+     <!-- 根据用户名和密码查询员工 -->
+    <select id="selectByUsernameAndPassword" resultType="com.azhuo.pojo.Emp">
+        SELECT id, username, name FROM emp WHERE username = #{username} AND password = #{password}
+    </select>
 </mapper>
 

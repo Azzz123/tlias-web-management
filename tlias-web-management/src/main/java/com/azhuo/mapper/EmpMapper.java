@@ -86,4 +86,8 @@ public interface EmpMapper {
      * 根据部门ID查询员工数量
      */
     int countByDeptId(Integer id);
+     /**
+      * 根据用户名和密码查询员工
+      */
+    Emp selectByUsernameAndPassword(String username, String password);
 }
