@@ -5,6 +5,7 @@ import com.azhuo.mapper.EmpMapper;
 import com.azhuo.pojo.*;
 import com.azhuo.service.EmpLogService;
 import com.azhuo.service.EmpService;
+import com.azhuo.utils.JwtUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -192,11 +195,18 @@ public class EmpServiceImpl implements EmpService {
         // 3 存在，返回登录信息
         log.info("登录成功，员工信息：{}",
                 loginEmp);
+        // 4 生成JWT令牌
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id", loginEmp.getId());
+        claims.put("username", loginEmp.getUsername());
+        claims.put("name", loginEmp.getName());
+        String jwt = JwtUtils.generateJwt(claims);
+
         return new LoginInfo(
                 loginEmp.getId(),
                 loginEmp.getUsername(),
                 loginEmp.getName(),
-                ""
+                jwt
         );
     }
 }

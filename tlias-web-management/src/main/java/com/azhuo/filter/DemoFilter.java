@@ -1,13 +1,12 @@
 package com.azhuo.filter;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
 @Slf4j
-@WebFilter(urlPatterns = "/*") // 拦截所有请求
+//@WebFilter(urlPatterns = "/*") // 拦截所有请求
 public class DemoFilter implements Filter {
     /**
      * 初始化方法，在过滤器被创建时调用，仅调用一次
