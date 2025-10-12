@@ -1,6 +1,6 @@
 package com.azhuo.config;
 
-import com.azhuo.interceptor.DemoInterceptor;
+import com.azhuo.interceptor.TokenInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -12,10 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
-    private DemoInterceptor demoInterceptor;
+    private TokenInterceptor tokenInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(demoInterceptor)
+        registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**");  // 对所有请求都拦截
     }
 }
