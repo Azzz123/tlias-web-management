@@ -8,4 +8,11 @@
         INSERT INTO operate_log (operate_emp_id, operate_time, class_name, method_name, method_params, return_value, cost_time)
         VALUES (#{operateEmpId}, #{operateTime}, #{className}, #{methodName}, #{methodParams}, #{returnValue}, #{costTime});
     </insert>
+
+    <!-- 分页查询操作日志 -->
+    <select id="list" resultType="com.azhuo.pojo.OperateLog">
+        SELECT id, operate_emp_id, operate_time, class_name, method_name, method_params, return_value, cost_time
+        FROM operate_log
+        ORDER BY operate_time DESC
+    </select>
 </mapper>
