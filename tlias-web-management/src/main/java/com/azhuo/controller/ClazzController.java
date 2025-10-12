@@ -1,5 +1,6 @@
 package com.azhuo.controller;
 
+import com.azhuo.anno.Log;
 import com.azhuo.pojo.*;
 import com.azhuo.service.ClazzService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,7 @@ public class ClazzController {
      * 添加班级
      */
     @PostMapping
+    @Log
     public Result save(@RequestBody Clazz clazz) {
         log.info("添加班级，参数：{}", clazz);
         // 调用服务层方法添加班级
@@ -57,6 +59,7 @@ public class ClazzController {
      * 修改班级
      */
     @PutMapping
+    @Log
     public Result update(@RequestBody Clazz clazz) {
         log.info("修改班级，参数：{}", clazz);
         // 调用服务层方法修改班级
@@ -69,6 +72,7 @@ public class ClazzController {
      * 根据ID删除班级
      */
     @DeleteMapping("/{id}")
+    @Log
     public Result deleteById(@PathVariable Integer id) {
         log.info("根据ID删除班级，参数：{}", id);
         // 调用服务层方法根据ID删除班级

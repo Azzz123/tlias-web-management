@@ -1,5 +1,6 @@
 package com.azhuo.controller;
 
+import com.azhuo.anno.Log;
 import com.azhuo.pojo.Dept;
 import com.azhuo.pojo.Result;
 import com.azhuo.service.DeptService;
@@ -49,7 +50,9 @@ public class DeptController {
         return Result.success();
      }*/
 //    3.如果参数是简单类型，如int、Integer等，且请求名和方法形参一致直接在方法参数中声明即可。
+
      @DeleteMapping
+     @Log
      public Result delete(Integer id) {
          log.info("删除部门id为：{}", id);
 //         System.out.println("删除部门id为：" + id);
@@ -65,7 +68,8 @@ public class DeptController {
      // 例如：{"name":"开发部"}
      // Dept{id=null, name='开发部', createTime=null, updateTime=null}
      // 通常在post和put请求中使用RequestBody注解
-    public Result add(@RequestBody Dept dept){
+     @Log
+     public Result add(@RequestBody Dept dept){
          log.info("添加部门：{}", dept);
 //         System.out.println("添加部门："+dept);
          deptService.add(dept);
@@ -90,6 +94,7 @@ public class DeptController {
 
      // 更新部门
     @PutMapping
+    @Log
     public Result update(@RequestBody Dept dept) {
          log.info("更新部门：{}", dept);
 //        System.out.println("更新部门：" + dept);

@@ -1,6 +1,8 @@
 package com.azhuo.interceptor;
 
+import com.azhuo.utils.CurrentHolder;
 import com.azhuo.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -37,7 +39,10 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         // 3.2.1 token无效，返回错误信息并响应状态码401
         try {
-            JwtUtils.parseJWT(token);
+            Claims claims = JwtUtils.parseJWT(token);
+            // 3.2.1.1 校验通过，将用户id存储到ThreadLocal中，以便后续日志记录使用
+            Integer employeeId = Integer.parseInt(claims.get("id").toString());
+            CurrentHolder.setCurrentId(employeeId);
         } catch (Exception e) {
             // 3.3 token无效，返回错误信息并响应状态码401
             log.info("令牌无效，响应状态码401");
@@ -49,5 +54,14 @@ public class TokenInterceptor implements HandlerInterceptor {
         // 3.2.2 token有效，放行
         log.info("令牌有效，放行");
         return true;
+    }
+
+    /**
+     * 放行后，移除ThreadLocal中的用户id，防止内存泄漏
+     */
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        // 4 移除ThreadLocal中的用户id
+        CurrentHolder.remove();
     }
 }

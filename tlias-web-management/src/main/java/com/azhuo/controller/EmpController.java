@@ -1,5 +1,6 @@
 package com.azhuo.controller;
 
+import com.azhuo.anno.Log;
 import com.azhuo.pojo.Emp;
 import com.azhuo.pojo.EmpQueryParam;
 import com.azhuo.pojo.PageResult;
@@ -44,6 +45,7 @@ public class EmpController {
      * 新增员工
      */
     @PostMapping
+    @Log
     public Result save(@RequestBody Emp emp) {
         // 日志记录
         log.info("新增员工，参数：{}", emp);
@@ -57,6 +59,7 @@ public class EmpController {
      * 批量删除员工
      */
     @DeleteMapping
+    @Log
     public Result delete(@RequestParam List<Integer> ids) {
         log.info("删除员工，参数：{}", Collections.singletonList(ids));
         // 调用服务层方法删除员工
@@ -81,6 +84,7 @@ public class EmpController {
      * 更新员工
      */
     @PutMapping
+    @Log
     public Result update(@RequestBody Emp emp) {
         log.info("更新员工，参数：{}", emp);
         // 调用服务层方法更新员工

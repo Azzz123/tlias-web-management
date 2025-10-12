@@ -1,5 +1,6 @@
 package com.azhuo.controller;
 
+import com.azhuo.anno.Log;
 import com.azhuo.pojo.PageResult;
 import com.azhuo.pojo.Result;
 import com.azhuo.pojo.Student;
@@ -36,6 +37,7 @@ public class StudentController {
      * 添加学员
      */
     @PostMapping
+    @Log
     public Result add(@RequestBody Student student) {
         log.info("添加学员: {}", student.toString());
         studentService.add(student);
@@ -56,6 +58,7 @@ public class StudentController {
      * 批量删除学生
      */
     @DeleteMapping("/{ids}")
+    @Log
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("批量删除学生: {}", ids);
         studentService.delete(ids);
@@ -66,6 +69,7 @@ public class StudentController {
      * 修改学生
      */
     @PutMapping
+    @Log
     public Result update(@RequestBody Student student) {
         log.info("修改学生: {}", student.toString());
         studentService.update(student);
